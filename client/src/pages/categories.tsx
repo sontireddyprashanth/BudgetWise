@@ -58,7 +58,7 @@ export default function Categories() {
         setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
       
-      <div className="lg:pl-64 flex flex-col flex-1">
+      <div className="lg:ml-64 flex flex-col flex-1">
         <MobileHeader 
           toggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
         />
