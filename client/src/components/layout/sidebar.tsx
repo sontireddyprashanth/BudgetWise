@@ -5,8 +5,11 @@ import {
   Tags, 
   PieChart, 
   Settings, 
-  Wallet 
+  Wallet,
+  LogOut 
 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { authManager } from "@/lib/auth";
 
 interface SidebarProps {
   isMobileMenuOpen: boolean;
@@ -14,7 +17,7 @@ interface SidebarProps {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: BarChart3, current: true },
+  { name: 'Dashboard', href: '/dashboard', icon: BarChart3, current: true },
   { name: 'Transactions', href: '/transactions', icon: ArrowLeftRight, current: false },
   { name: 'Categories', href: '/categories', icon: Tags, current: false },
   { name: 'Reports', href: '/reports', icon: PieChart, current: false },
@@ -22,7 +25,17 @@ const navigation = [
 ];
 
 export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }: SidebarProps) {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
+  const { toast } = useToast();
+
+  const handleLogout = () => {
+    authManager.logout();
+    toast({
+      title: "Logged out",
+      description: "You have been successfully logged out.",
+    });
+    navigate("/login");
+  };
 
   return (
     <>
@@ -78,16 +91,22 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }: Sideb
         </nav>
         
         <div className="p-4 border-t border-gray-200">
-          <div className="flex items-center">
-            <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center">
-              <span className="text-white text-sm font-medium">JD</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center">
+                <span className="text-white text-sm font-medium">JD</span>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-gray-700">John Doe</p>
+              </div>
             </div>
-            <div className="ml-3">
-              <p className="text-sm font-medium text-gray-700">John Doe</p>
-              <button className="text-xs text-gray-500 hover:text-gray-700">
-                Sign out
-              </button>
-            </div>
+            <button 
+              onClick={handleLogout}
+              className="text-gray-400 hover:text-gray-600 p-1 rounded-md transition-colors"
+              title="Sign out"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>
