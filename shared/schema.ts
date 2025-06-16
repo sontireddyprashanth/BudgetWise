@@ -2,8 +2,17 @@ import { pgTable, text, serial, integer, boolean, decimal, timestamp } from "dri
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const transactions = pgTable("transactions", {
   id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
   description: text("description").notNull(),
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
   type: text("type").notNull(), // 'income' or 'expense'
@@ -14,9 +23,25 @@ export const transactions = pgTable("transactions", {
 
 export const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull().unique(),
+  userId: integer("user_id").notNull(),
+  name: text("name").notNull(),
   type: text("type").notNull(), // 'income' or 'expense'
   color: text("color").notNull(),
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  email: true,
+  password: true,
+  name: true,
+}).extend({
+  email: z.string().email("Please enter a valid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  name: z.string().min(1, "Name is required"),
+});
+
+export const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email"),
+  password: z.string().min(1, "Password is required"),
 });
 
 export const insertTransactionSchema = createInsertSchema(transactions).pick({
@@ -37,6 +62,9 @@ export const insertCategorySchema = createInsertSchema(categories).pick({
   color: true,
 });
 
+export type User = typeof users.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type LoginData = z.infer<typeof loginSchema>;
 export type Transaction = typeof transactions.$inferSelect;
 export type InsertTransaction = z.infer<typeof insertTransactionSchema>;
 export type Category = typeof categories.$inferSelect;
