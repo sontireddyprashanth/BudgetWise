@@ -68,7 +68,7 @@ export default function CategoryChart() {
   }, [categoryData]);
 
   return (
-    <Card className="p-6">
+    <Card className="p-3 sm:p-4">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-medium text-gray-900">Expense Categories</h3>
         <Select value={period} onValueChange={(value: 'month' | 'quarter' | 'year') => setPeriod(value)}>

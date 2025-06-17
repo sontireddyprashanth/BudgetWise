@@ -12,7 +12,7 @@ export default function StatsCards() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="p-5 animate-pulse">
+          <Card key={i} className="p-3 sm:p-4 animate-pulse">
             <div className="h-16 bg-gray-200 rounded"></div>
           </Card>
         ))}
@@ -23,7 +23,7 @@ export default function StatsCards() {
   if (!stats) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card className="p-5 text-center text-gray-500">
+        <Card className="p-3 sm:p-4 text-center text-gray-500">
           No stats available
         </Card>
       </div>
@@ -45,7 +45,7 @@ export default function StatsCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       {/* Total Income */}
-      <Card className="overflow-hidden shadow rounded-lg">
+      <Card className="overflow-hidden shadow rounded-lg p-3 sm:p-4">
         <div className="p-5">
           <div className="flex items-center">
             <div className="flex-shrink-0">
@@ -78,7 +78,7 @@ export default function StatsCards() {
       </Card>
 
       {/* Total Expenses */}
-      <Card className="overflow-hidden shadow rounded-lg">
+      <Card className="overflow-hidden shadow rounded-lg p-3 sm:p-4">
         <div className="p-5">
           <div className="flex items-center">
             <div className="flex-shrink-0">
@@ -111,7 +111,7 @@ export default function StatsCards() {
       </Card>
 
       {/* Net Balance */}
-      <Card className="overflow-hidden shadow rounded-lg">
+      <Card className="overflow-hidden shadow rounded-lg p-3 sm:p-4">
         <div className="p-5">
           <div className="flex items-center">
             <div className="flex-shrink-0">

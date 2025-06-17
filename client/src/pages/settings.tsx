@@ -107,7 +107,7 @@ export default function Settings() {
                       <Label htmlFor="name">Full Name</Label>
                       <Input 
                         id="name" 
-                        defaultValue="John Doe" 
+                        defaultValue="Prashanth Reddy" 
                         className="mt-1"
                       />
                     </div>
@@ -116,7 +116,7 @@ export default function Settings() {
                       <Input 
                         id="email" 
                         type="email" 
-                        defaultValue="john.doe@example.com" 
+                        defaultValue="email@example.com" 
                         className="mt-1"
                       />
                     </div>
