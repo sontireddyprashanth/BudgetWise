@@ -66,11 +66,7 @@ The application uses two main tables:
 - **tsx**: TypeScript execution for development
 - **esbuild**: Fast JavaScript bundling for production
 - **tailwindcss**: Utility-first CSS framework
-- **@replit/vite-plugin-***: Replit-specific development enhancements
-
-## Deployment Strategy
-
-The application is configured for deployment on Replit's autoscale infrastructure:
+- **@/vite-plugin-***: specific development enhancements
 
 ### Build Process
 - Client: Vite builds React application to `dist/public`
